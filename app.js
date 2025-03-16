@@ -20,9 +20,19 @@ function renderizarAmigos() {
 
     for (let index = 0; index < amigos.length; index++) {
         let item=document.createElement("li");
-        item.textContent=amigos[index];
+        let botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "x";
+        botonEliminar.onclick = () => eliminarParticipante(index);
+        botonEliminar.className = "button-eliminar";
+        item.appendChild(botonEliminar);
+        item.appendChild(document.createTextNode(amigos[index]));
         listaAmigos.appendChild(item);
     };
+};
+
+function eliminarParticipante(index) {
+    amigos.splice(index, 1);
+    renderizarAmigos();
 };
 
 function sortearAmigo() {
@@ -31,7 +41,7 @@ function sortearAmigo() {
     };
     if(amigos.length === 1) {
         alert("Hay sólo un amigo ");
-    }
+    };
     let randomIndex = Math.floor(Math.random() * amigos.length);
     let amigoSorteado= amigos[randomIndex];
     let resultado = document.getElementById("resultado");
