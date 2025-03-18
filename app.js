@@ -37,9 +37,19 @@ function eliminarParticipante(index) {
 };
 
 function sortearAmigo() {
+    let numeroSorteo = document.getElementById("numeroSorteo");
+    let resultado = document.getElementById("resultado");
+
     if (amigos.length < 1) {
         alert("No hay participantes para el sorteo");
-        return
+        if (contadorSortados > 0) {
+           contadorSortados = 0;
+           numeroSorteo.innerHTML = `Se reinicia el sorteo`;
+           resultado.innerHTML="";
+           return;
+        }
+        return;
+
     };
 
     if (amigos.length < 2 && contadorSortados === 0) {
@@ -50,9 +60,8 @@ function sortearAmigo() {
     contadorSortados++;
     let randomIndex = Math.floor(Math.random() * amigos.length);
     let amigoSorteado= amigos[randomIndex];
-    let numeroSorteo = document.getElementById("numeroSorteo");
+ 
     numeroSorteo.innerHTML = `Sorteos realizados: ${contadorSortados}`;
-    let resultado = document.getElementById("resultado");
     resultado.innerHTML=`El amigo sorteado es: ${amigoSorteado}`;
     eliminarParticipante(randomIndex);
 };
